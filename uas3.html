@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form"></form>
+        <h1>Pendaftaran Seminar</h1>
+        <label>Nama</label></br>
+        <input type="text" id="nama"></br>
+        <span id="namaeror" class="eror"></span>
+        <br />
+        
+        <label>Email</label></br>
+        <input type="email" id="email"></br>
+        <span id="emaileror" class="eror"></span>
+        <br />
+        
+        <label>Tahun</label></br>
+        <input type="number" id="tahun"></br>
+        <span id="tahuneror" class="eror"></span>
+        <br />
+
+        <button type="submit">Daftar</button>
+    </form>
+    <p id="formsukses" class="sukses"></p>
+
+    <div id="hasil">
+        <p id="hasilnama"></p>
+        <p id="hasilemail"></p>
+        <p id="hasiltahun"></p>
+    </div>
+
+    <script>
+        const form = document.getElementById("form");
+        const nama = document.getElementById("nama");
+        const namaeror = document.getElementById("namaeror");
+
+        const email = document.getElementById("email");
+        const emaileror = document.getElementById("emaileror");
+
+        const tahun = document.getElementById("tahun");
+        const tahuneror = document.getElementById("tahuneror");
+        
+        const formsukses = document.getElementById("formsukses")
+
+    form.addEventListener("submit",function(e) {
+        e.preventDefault();
+        let valid = true;
+
+        if (nama.value.trim() === "") {
+            namaeror.textContent = "Nama wajib diisi";
+            valid = false;
+        } else {
+            namaeror.textContent = "";
+        }
+
+        if (email.value.trim() === "") {
+            emaileror.textContent = "Email wajib diisi";
+            valid = false;
+        } else {
+            emaileror.textContent = "";
+        }
+
+        if (tahun.value.trim() === "") {
+            tahuneror.textContent = "Tahun wajib diisi";
+            valid = false;
+        } else {
+            tahuneror.textContent = "";
+        }
+
+        if(valid){
+            formsukses.textContent = "Pendaftaran berhasil!";
+        }
+    });
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const nama = getElementById("nama").value;
+        const email = getElementById("email").value;
+        const tahun = getElementById("tahun").value;
+
+        document.getElementById("hasilnama").textContent = "Nama: " + nama;
+        document.getElementById("hasilemail").textContent = "Email" + email;
+        document.getElementById("hasiltahun").textContent = "Tahun: " + tahun;
+
+        document.getElementById("hasil").style.display = "block";
+        form.reset();
+    });
+    </script>
+</body>
+</html>
