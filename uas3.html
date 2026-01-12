@@ -1,95 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pendaftaran Seminar</title>
+    <style>
+        #info {
+            display: none;
+            background: #eee;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
+
 <body>
-    <form id="form"></form>
-        <h1>Pendaftaran Seminar</h1>
-        <label>Nama</label></br>
-        <input type="text" id="nama"></br>
-        <span id="namaeror" class="eror"></span>
-        <br />
-        
-        <label>Email</label></br>
-        <input type="email" id="email"></br>
-        <span id="emaileror" class="eror"></span>
-        <br />
-        
-        <label>Tahun</label></br>
-        <input type="number" id="tahun"></br>
-        <span id="tahuneror" class="eror"></span>
-        <br />
 
-        <button type="submit">Daftar</button>
-    </form>
-    <p id="formsukses" class="sukses"></p>
+    <h2>Pendaftaran Seminar</h2>
 
-    <div id="hasil">
-        <p id="hasilnama"></p>
-        <p id="hasilemail"></p>
-        <p id="hasiltahun"></p>
+    Nama: <input type="text" id="nama"><br><br>
+    Email: <input type="text" id="email"><br><br>
+    Tahun Lahir: <input type="number" id="tahun"><br><br>
+
+    <button id="btn" onmouseover="tampilInfo()" onmouseout="sembunyiInfo()" onclick="daftar()">
+        Daftar
+    </button>
+
+    <div id="info">
+        <ul>
+            <li>Nama tidak boleh kosong</li>
+            <li>Email harus valid</li>
+            <li>Tahun lahir antara 1900 - sekarang</li>
+        </ul>
     </div>
 
+    <p id="pesan"></p>
+
     <script>
-        const form = document.getElementById("form");
-        const nama = document.getElementById("nama");
-        const namaeror = document.getElementById("namaeror");
-
-        const email = document.getElementById("email");
-        const emaileror = document.getElementById("emaileror");
-
-        const tahun = document.getElementById("tahun");
-        const tahuneror = document.getElementById("tahuneror");
-        
-        const formsukses = document.getElementById("formsukses")
-
-    form.addEventListener("submit",function(e) {
-        e.preventDefault();
-        let valid = true;
-
-        if (nama.value.trim() === "") {
-            namaeror.textContent = "Nama wajib diisi";
-            valid = false;
-        } else {
-            namaeror.textContent = "";
+        function tampilInfo() {
+            document.getElementById("info").style.display = "block";
         }
 
-        if (email.value.trim() === "") {
-            emaileror.textContent = "Email wajib diisi";
-            valid = false;
-        } else {
-            emaileror.textContent = "";
+        function sembunyiInfo() {
+            document.getElementById("info").style.display = "none";
         }
 
-        if (tahun.value.trim() === "") {
-            tahuneror.textContent = "Tahun wajib diisi";
-            valid = false;
-        } else {
-            tahuneror.textContent = "";
+        function daftar() {
+            let nama = document.getElementById("nama").value;
+            let email = document.getElementById("email").value;
+            let tahun = parseInt(document.getElementById("tahun").value);
+            let pesan = document.getElementById("pesan");
+            let btn = document.getElementById("btn");
+
+            let tahunSekarang = new Date().getFullYear();
+            let regexEmail = /\S+@\S+\.\S+/;
+
+            if (nama === "" || email === "" || isNaN(tahun)) {
+                pesan.innerHTML = "Semua field wajib diisi!";
+                return;
+            }
+
+            if (!regexEmail.test(email)) {
+                pesan.innerHTML = "Format email tidak valid!";
+                return;
+            }
+
+            if (tahun < 1900 || tahun > tahunSekarang) {
+                pesan.innerHTML = "Tahun lahir tidak valid!";
+                return;
+            }
+
+            let umur = tahunSekarang - tahun;
+
+            pesan.innerHTML = `
+    <b>Pendaftaran Berhasil!</b><br>
+    Nama: ${nama}<br>
+    Email: ${email}<br>
+    Umur: ${umur} tahun
+  `;
+
+            btn.innerHTML = "Berhasil";
+            btn.disabled = true;
         }
-
-        if(valid){
-            formsukses.textContent = "Pendaftaran berhasil!";
-        }
-    });
-
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const nama = getElementById("nama").value;
-        const email = getElementById("email").value;
-        const tahun = getElementById("tahun").value;
-
-        document.getElementById("hasilnama").textContent = "Nama: " + nama;
-        document.getElementById("hasilemail").textContent = "Email" + email;
-        document.getElementById("hasiltahun").textContent = "Tahun: " + tahun;
-
-        document.getElementById("hasil").style.display = "block";
-        form.reset();
-    });
     </script>
+
 </body>
+
 </html>

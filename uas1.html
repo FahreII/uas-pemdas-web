@@ -1,28 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>tahun kabisat</h1>
-    <script>
-        let tahun = prompt("Masukan tahun: ")
-        tahun = parseInt(tahun);
+<html>
 
-        if (tahun <= 2023) {
-            document.write("<p> Tahun " +  tahun + " bukan tahun kabisat");
-        } else if (tahun == 2024){
-            document.write("<p> tahun " +  tahun + " adalah tahun kabisat");
-        } else if (tahun == 2400) {
-            document.write("<p> tahun " + tahun + " adalah tahun kabisat");
-        } else if (tahun == 2100) {
-            document.write("<p> tahun " + tahun + " bukan tahun kabisat");
-        }
-        else {
-            document.write("cuma disuruh masukan tahun 2023,2024,2100,2400")
+<head>
+    <title>Tahun Kabisat</title>
+</head>
+
+<body>
+    <h2>Tahun Kabisat</h2>
+    <input type="number" id="tahun" placeholder="Masukkan tahun">
+    <button onclick="cekKabisat()">Cek</button>
+    <p id="hasil"></p>
+
+    <script>
+        function cekKabisat() {
+            let tahun = parseInt(document.getElementById("tahun").value);
+            let hasil = document.getElementById("hasil");
+
+            if (isNaN(tahun)) {
+                hasil.innerHTML = "Masukkan tahun yang valid!";
+                return;
+            }
+
+            if ((tahun % 400 === 0) || (tahun % 4 === 0 && tahun % 100 !== 0)) {
+                hasil.innerHTML = "Tahun " + tahun + " adalah tahun kabisat";
+            } else {
+                hasil.innerHTML = "Tahun " + tahun + " bukan tahun kabisat";
+            }
         }
     </script>
 </body>
+
 </html>

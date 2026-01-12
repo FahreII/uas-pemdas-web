@@ -1,20 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tabel Perkalian</title>
 </head>
+
 <body>
-    <h1>Tabel perkalian</h1>
+    <h2>Tabel Perkalian</h2>
+    <input type="number" id="angka" placeholder="Masukkan angka">
+    <button onclick="tampilkan()">Tampilkan</button>
+    <div id="output"></div>
+
     <script>
-        let angka = prompt("masukan angka: ")
-            angka = parseInt(angka);
-        
-        while (angka <= 10); {
-            hasil = angka * angka;
-            document.write(hasil);
+        function tampilkan() {
+            let angka = parseInt(document.getElementById("angka").value);
+            let output = document.getElementById("output");
+            output.innerHTML = "";
+
+            if (isNaN(angka)) {
+                output.innerHTML = "Masukkan angka!";
+                return;
+            }
+
+            for (let i = 1; i <= 10; i++) {
+                output.innerHTML += angka + " x " + i + " = " + (angka * i) + "<br>";
+            }
         }
     </script>
 </body>
+
 </html>
